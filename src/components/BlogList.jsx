@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import BlogItem from "./BlogItem";
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+import { apiBaseUrl } from "../context/baseurl";
 
 export default function BlogList() {
     const [blogs, setBlogs] = useState([]);

@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { UserContext } from "../context/UserContext";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+const burl = "https://blogger-my-app.vercel.app";
 
 export default function RegisterPage() {
     const [name, setName] = useState("");
@@ -26,7 +27,7 @@ export default function RegisterPage() {
             });
             if(res.status === 201) {
                 toast.success(res.data.message, { position: "top-center" });
-                window.location.href = "/auth/login";
+                window.location.href = `${burl}/auth/login`;
             }
         }
         catch(e) {

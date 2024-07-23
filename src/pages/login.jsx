@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+const burl = "https://blogger-my-app.vercel.app";
 
 export default function LoginPage() {
     const [emailId, setEmailId] = useState("");
@@ -30,7 +31,7 @@ export default function LoginPage() {
                 toast.success(res.data.message, { position: "top-center" });
                 setLoggedInUser([res.data.user]);
                 setTimeout(() => {
-                    window.location.href = "/admin";
+                    window.location.href = `${burl}/admin`;
                 }, 1000)
             }
             else {

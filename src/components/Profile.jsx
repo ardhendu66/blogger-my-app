@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { UserContext } from '../context/UserContext';
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+const burl = "https://blogger-my-app.vercel.app";
 
 export default function ProfileComponent() {
     const [file, setFile] = useState();
@@ -23,15 +24,12 @@ export default function ProfileComponent() {
             });
             if(res) {
                 const url = res.data.url.replace("http://", "https://");
-                const resp = await axios.put(`/api/admin/profile`, { 
+                const resp = await axios.put(`${apiBaseUrl}/api/admin/profile`, { 
                     id: loggedInUser[0]._id, image: url 
                 });
                 if(resp.status === 201 || resp.status === 200) {
                     toast.success(resp.data.message, { position: "top-center" });
-                    // setLoggedInUser(prev => {
-
-                    // })
-                    window.location.href = "/admin";
+                    window.location.href = `${burl}/admin`;
                 }
             }
         }
