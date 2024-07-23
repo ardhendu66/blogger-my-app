@@ -1,6 +1,3 @@
-import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import Header from './Header';
 import { CiCirclePlus } from "react-icons/ci";
 import { FiEdit } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";

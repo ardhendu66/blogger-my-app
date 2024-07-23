@@ -1,11 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import api from "../api";
 import { NavLink, redirect } from "react-router-dom";
 import Header from "../components/Header";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { UserContext } from "../context/UserContext";
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 const burl = "https://blogger-my-app.vercel.app";
 
 export default function RegisterPage() {

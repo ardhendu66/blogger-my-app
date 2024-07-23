@@ -1,8 +1,7 @@
 import { useState, useContext } from 'react';
-import axios from 'axios';
+import api from "../api";
 import { toast } from 'react-toastify';
 import { UserContext } from '../context/UserContext';
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 const burl = "https://blogger-my-app.vercel.app";
 
 export default function ProfileComponent() {
@@ -17,14 +16,14 @@ export default function ProfileComponent() {
         const formData = new FormData();
         formData.append("thumbnail_image", file);
         try {
-            const res = await axios.post(`${apiBaseUrl}/api/admin/upload`, formData, {
+            const res = await api.post(`/api/admin/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
             if(res) {
                 const url = res.data.url.replace("http://", "https://");
-                const resp = await axios.put(`${apiBaseUrl}/api/admin/profile`, { 
+                const resp = await api.put(`/api/admin/profile`, { 
                     id: loggedInUser[0]._id, image: url 
                 });
                 if(resp.status === 201 || resp.status === 200) {

@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { toast } from 'react-toastify';
 import { UserContext } from '../context/UserContext';
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function AddBlogs() {
     const [categories, setCategories] = useState([
@@ -21,28 +20,29 @@ export default function AddBlogs() {
         }
         const formData = new FormData();
         formData.append("thumbnail_image", file);
-        console.log("formData", file);
+        // console.log("formData", file);
         try {
-            const res = await axios.post(`${apiBaseUrl}/api/admin/upload`, formData, {
+            const res = await api.post(`/api/admin/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
             if(res) {
                 const url = res.data.url.replace("http://", "https://");
-                const resp = await axios.post(`${apiBaseUrl}/api/blog/create`, {
+                const resp = await api.post(`/api/blog/create`, {
                     title, description, category: selectedCategory, image: url,
                     author: loggedInUser[0]._id
                 });
                 if(resp.status === 201 || resp.status === 200) {
                     console.log(resp.data.message);
                     toast.success(resp.data.message, { position: "top-center" });
-                    window.location.href = "/";
+                    window.location.href = "/admin";
                 }
             }
         }
         catch(err) {
             console.log(err.message);
+            toast.error(err.message, { position: "top-center" });
         }
     }
 

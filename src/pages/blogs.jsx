@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
+import api from "../api";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { TiSocialFacebookCircular } from "react-icons/ti";
 import { FaInstagram } from "react-icons/fa6";
 import { FiTwitter } from "react-icons/fi";
 import { CiLinkedin } from "react-icons/ci";
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function SingleBlog() {
     const [blogData, setBlogData] = useState(null);
@@ -16,7 +15,9 @@ export default function SingleBlog() {
 
     const fetchSingleBlog = async () => {
         try {
-            const res = await axios.get(`${apiBaseUrl}/api/blog?id=${id}`);
+            const res = await api.get(`/api/blog?id=${id}`, {
+                cre
+            });
             if(res) {
                 setBlogData(res.data);
             }

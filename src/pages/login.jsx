@@ -3,9 +3,8 @@ import { NavLink } from 'react-router-dom';
 import Header from '../components/Header';
 import { FaEyeSlash, FaEye } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import api from '../api';
 import { UserContext } from '../context/UserContext';
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 const burl = "https://blogger-my-app.vercel.app";
 
 export default function LoginPage() {
@@ -26,10 +25,12 @@ export default function LoginPage() {
         }
 
         try {
-            const res = await axios.post(`${apiBaseUrl}/api/auth/login`, { email: emailId, password });
+            const res = await api.post(`/api/auth/login`, { email: emailId, password });
             if(res.status === 201) {
                 toast.success(res.data.message, { position: "top-center" });
-                setLoggedInUser([res.data.user]);
+                const user = res.data.user;
+                user.token = res.data.token;
+                setLoggedInUser([user]);
                 setTimeout(() => {
                     window.location.href = `${burl}/admin`;
                 }, 1000)
