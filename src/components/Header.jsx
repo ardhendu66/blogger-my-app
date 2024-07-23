@@ -3,13 +3,14 @@ import { NavLink } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function Header() {
     const { loggedInUser, emptyUser } = useContext(UserContext);
 
     const handleOnLogOut = async () => {
         try {
-            const res = await axios.post("/api/auth/logout");
+            const res = await axios.post(`${apiBaseUrl}/api/auth/logout`);
             if(res.status === 200) {
                 toast.success(res.data.message, { position: "top-center" });
             }

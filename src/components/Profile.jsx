@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { UserContext } from '../context/UserContext';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function ProfileComponent() {
     const [file, setFile] = useState();
@@ -15,7 +16,7 @@ export default function ProfileComponent() {
         const formData = new FormData();
         formData.append("thumbnail_image", file);
         try {
-            const res = await axios.post('/api/admin/upload', formData, {
+            const res = await axios.post(`${apiBaseUrl}/api/admin/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

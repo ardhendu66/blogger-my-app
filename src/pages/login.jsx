@@ -5,6 +5,7 @@ import { FaEyeSlash, FaEye } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function LoginPage() {
     const [emailId, setEmailId] = useState("");
@@ -24,7 +25,7 @@ export default function LoginPage() {
         }
 
         try {
-            const res = await axios.post("/api/auth/login", { email: emailId, password });
+            const res = await axios.post(`${apiBaseUrl}/api/auth/login`, { email: emailId, password });
             if(res.status === 201) {
                 toast.success(res.data.message, { position: "top-center" });
                 setLoggedInUser([res.data.user]);

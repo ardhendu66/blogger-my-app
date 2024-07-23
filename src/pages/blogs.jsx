@@ -8,6 +8,7 @@ import { TiSocialFacebookCircular } from "react-icons/ti";
 import { FaInstagram } from "react-icons/fa6";
 import { FiTwitter } from "react-icons/fi";
 import { CiLinkedin } from "react-icons/ci";
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function SingleBlog() {
     const [blogData, setBlogData] = useState(null);
@@ -15,7 +16,7 @@ export default function SingleBlog() {
 
     const fetchSingleBlog = async () => {
         try {
-            const res = await axios.get(`/api/blog?id=${id}`);
+            const res = await axios.get(`${apiBaseUrl}/api/blog?id=${id}`);
             if(res) {
                 setBlogData(res.data);
             }

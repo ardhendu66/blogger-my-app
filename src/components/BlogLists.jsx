@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { UserContext } from '../context/UserContext';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function BlogLists() {
     const [blogs, setBlogs] = useState([]);
@@ -12,7 +13,7 @@ export default function BlogLists() {
         const fetchAllBlogs = async () => {
             try {
                 const res = await axios.get(
-                    `/api/admin/blogs?authorId=${loggedInUser[0]._id}`
+                    `${apiBaseUrl}/api/admin/blogs?authorId=${loggedInUser[0]._id}`
                 );
                 if(res.status === 200) {
                     setBlogs(res.data);
@@ -30,7 +31,7 @@ export default function BlogLists() {
 
     const deleteCertainBlog = async (id) => {
         try {
-            const res = await axios.delete(`/api/admin/blogs?id=${id}`);
+            const res = await axios.delete(`${apiBaseUrl}/api/admin/blogs?id=${id}`);
             if(res.status === 202 || res.status === 200) {
                 toast.success(res.data.message, { position: "top-center" });
             }

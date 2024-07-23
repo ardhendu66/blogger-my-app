@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import BlogItem from "./BlogItem";
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function BlogList() {
     const [blogs, setBlogs] = useState([]);
@@ -11,7 +12,7 @@ export default function BlogList() {
     useEffect(() => {
         const fetchAllBlogs = async () => {
             try {
-                const res = await axios.get(`/api/blog/all`);
+                const res = await axios.get(`${apiBaseUrl}/api/blog/all`);
                 if(res.status === 200) {
                     setBlogs(res.data);
                 }

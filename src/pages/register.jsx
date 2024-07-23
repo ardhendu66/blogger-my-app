@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { UserContext } from "../context/UserContext";
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function RegisterPage() {
     const [name, setName] = useState("");
@@ -20,7 +21,7 @@ export default function RegisterPage() {
         }
 
         try {
-            const res = await axios.post("/api/auth/register", {
+            const res = await axios.post(`${apiBaseUrl}/api/auth/register`, {
                 name, email: emailId, password
             });
             if(res.status === 201) {
