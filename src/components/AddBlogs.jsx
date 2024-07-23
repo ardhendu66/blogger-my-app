@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
-import api from '../api';
+import axios from 'axios';
+import apiBaseUrl from '../api';
 import { toast } from 'react-toastify';
 import { UserContext } from '../context/UserContext';
 
@@ -22,14 +23,14 @@ export default function AddBlogs() {
         formData.append("thumbnail_image", file);
         // console.log("formData", file);
         try {
-            const res = await api.post(`/api/admin/upload`, formData, {
+            const res = await axios.post(`${apiBaseUrl}/api/admin/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
             if(res) {
                 const url = res.data.url.replace("http://", "https://");
-                const resp = await api.post(`/api/blog/create`, {
+                const resp = await axios.post(`${apiBaseUrl}/api/blog/create`, {
                     title, description, category: selectedCategory, image: url,
                     author: loggedInUser[0]._id
                 });

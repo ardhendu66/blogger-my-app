@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import api from "../api";
+import axios from 'axios';
 import { toast } from 'react-toastify';
 import { UserContext } from '../context/UserContext';
 
@@ -11,8 +12,8 @@ export default function BlogLists() {
     useEffect(() => {
         const fetchAllBlogs = async () => {
             try {
-                const res = await api.get(
-                    `/api/admin/blogs?authorId=${loggedInUser[0]._id}`
+                const res = await axios.get(
+                    `${apiBaseUrl}/api/admin/blogs?authorId=${loggedInUser[0]._id}`
                 );
                 if(res.status === 200) {
                     setBlogs(res.data);
@@ -30,7 +31,7 @@ export default function BlogLists() {
 
     const deleteCertainBlog = async (id) => {
         try {
-            const res = await api.delete(`/api/admin/blogs?id=${id}`);
+            const res = await axios.delete(`${apiBaseUrl}/api/admin/blogs?id=${id}`);
             if(res.status === 202 || res.status === 200) {
                 toast.success(res.data.message, { position: "top-center" });
             }

@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+const apiBaseUrl = "https://ardhendu-blogger-backend.onrender.com";
 
 const api = axios.create({
-  baseURL: apiBaseUrl,
+  baseURL: "https://ardhendu-blogger-backend.onrender.com",
   withCredentials: true, // Important to include cookies
 });
 
-export default api;
+export default apiBaseUrl;

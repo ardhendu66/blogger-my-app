@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import api from "../api";
+import axios from "axios";
+import apiBaseUrl from "../api";
 import { NavLink, redirect } from "react-router-dom";
 import Header from "../components/Header";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -26,7 +27,7 @@ export default function RegisterPage() {
             });
             if(res.status === 201) {
                 toast.success(res.data.message, { position: "top-center" });
-                window.location.href = `${burl}/auth/login`;
+                window.location.href = `/auth/login`;
             }
         }
         catch(e) {

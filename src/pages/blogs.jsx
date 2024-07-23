@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import api from "../api";
+import apiBaseUrl from "../api";
+import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { TiSocialFacebookCircular } from "react-icons/ti";
@@ -15,7 +16,7 @@ export default function SingleBlog() {
 
     const fetchSingleBlog = async () => {
         try {
-            const res = await api.get(`/api/blog?id=${id}`, {
+            const res = await axios.get(`${apiBaseUrl}/api/blog?id=${id}`, {
                 cre
             });
             if(res) {
